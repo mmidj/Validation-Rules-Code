@@ -1,0 +1,34 @@
+
+                                  Validation rules for various criteria of TTC
+
+
+Acceptance Criteria
+• TTC record should always be associated with a lead or opportunity
+• Use cases to address / Technical Information Needed/Environment/
+Engagement summary/ scope cannot be blank if collaboration type is version update.
+• Respond by date should be in future and minimum 5 days interval from today
+
+
+1:-
+
+AND( ISPICKVAL( Collaboration_Type__c , "Version Update") ,
+OR(
+ISBLANK( Use_Cases_to_Address__c ),
+ISBLANK( Technical_information_needed__c ),
+ISPICKVAL(Environment__c, ""),
+ISBLANK( Engagement_Summary__c ),
+ISBLANK( Scope__c )
+))
+
+2:-
+
+AND(
+Respond_by_Date__c <= (TODAY() + 5)
+)
+
+3:-
+
+AND(
+ISBLANK(Lead__c),
+ISBLANK(Opportunity__c)
+)
